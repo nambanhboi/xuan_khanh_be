@@ -11,7 +11,6 @@ using static Ecom.Services.DanhGiaService;
 
 namespace Ecom.Controllers
 {
-    [Authorize]
     [Route("api/danh-gia")]
     [ApiController]
     public class DanhGiaController : GenericController<danh_gia, DanhGiaDto>
@@ -36,7 +35,6 @@ namespace Ecom.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet("get-danh-gia/{ma}")]
         public async Task<List<DanhGiaDto>> GetDanhGia([FromRoute]string ma)
         {
