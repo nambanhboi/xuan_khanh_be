@@ -23,22 +23,53 @@ namespace Ecom.Services
             try
             {
                 var data = _context.gio_hang.FirstOrDefault(x=> x.account_id == request.account_id);
-                var result = new GioHangDto
+                if (data != null)
                 {
-                    id = data!.id,
-                    account_id = data!.account_id,
-                    ds_chi_tiet_gio_hang = _context.chi_tiet_gio_hang.Where(x => x.gio_hang_id == data.id).Select(a => new ChiTietGioHangDto
+                    var result = new GioHangDto
                     {
-                        id = a.id,
-                        gio_hang_id = a.gio_hang_id,
-                        san_pham_id = a.san_pham_id,
-                        so_luong = a.so_luong,
-                        Created = a.Created,
-                        san_pham = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id),
-                    }).ToList(),
-                };
+                        id = data!.id,
+                        account_id = data!.account_id,
+                        ds_chi_tiet_gio_hang = _context.chi_tiet_gio_hang.Where(x => x.gio_hang_id == data.id).Select(a => new ChiTietGioHangDto
+                        {
+                            id = a.id,
+                            gio_hang_id = a.gio_hang_id,
+                            san_pham_id = a.san_pham_id,
+                            so_luong = a.so_luong,
+                            Created = a.Created,
+                            san_pham = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id),
+                        }).ToList(),
+                    };
+                    return Task.FromResult(result);
 
-                return Task.FromResult(result);
+                }
+                else
+                {
+                    var newGioHang = new gio_hang
+                    {
+                        id = Guid.NewGuid(),
+                        account_id = request.account_id ?? Guid.NewGuid(),
+                    };
+                    _context.gio_hang.Add(newGioHang);
+                    _context.SaveChanges();
+
+                    var result = new GioHangDto
+                    {
+                        id = newGioHang!.id,
+                        account_id = newGioHang!.account_id,
+                        ds_chi_tiet_gio_hang = _context.chi_tiet_gio_hang.Where(x => x.gio_hang_id == newGioHang.id).Select(a => new ChiTietGioHangDto
+                        {
+                            id = a.id,
+                            gio_hang_id = a.gio_hang_id,
+                            san_pham_id = a.san_pham_id,
+                            so_luong = a.so_luong,
+                            Created = a.Created,
+                            san_pham = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id),
+                        }).ToList(),
+                    };
+                    return Task.FromResult(result);
+
+                }
+
             }
             catch (Exception ex) {
                 throw new Exception(ex.Message);
