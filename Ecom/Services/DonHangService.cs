@@ -75,8 +75,8 @@ namespace Ecom.Services
                                       id = a.id,
                                       thanh_tien = a.thanh_tien,
                                       ten_san_pham = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id)!.ten_san_pham,
-                                      mau_sac = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id)!.mau_sac,
-                                      kich_thuoc = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id)!.size
+                                      dung_tich = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id)!.dung_tich,
+                                      loai_nuoc_hoa = _context.san_pham.FirstOrDefault(b => b.id == a.san_pham_id)!.loai_nuoc_hoa
                                   }).ToList()
                               };
                 // Sắp xếp theo trạng thái tăng dần, sau đó ngày mua giảm dần

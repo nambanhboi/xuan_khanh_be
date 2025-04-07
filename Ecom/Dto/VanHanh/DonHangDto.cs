@@ -25,8 +25,8 @@ namespace Ecom.Dto.VanHanh
         public Guid? don_hang_id { get; set; }
         public Guid? san_pham_id { get; set; }
         public string? ten_san_pham { get; set; }
-        public string? kich_thuoc { get; set; }
-        public string? mau_sac { get; set; }
+        public string? dung_tich { get; set; } //dung tích
+        public string? loai_nuoc_hoa { get; set; } //loại nước hoa
         public decimal? thanh_tien { get; set; }
         public decimal? don_gia { get; set; }
         public int? so_luong { get; set; }

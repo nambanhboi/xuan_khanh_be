@@ -17,8 +17,8 @@ namespace Ecom.Dto.QuanLySanPham
         public int? so_luong { get; set; }
         public string? sku { get; set; }
         public string? duong_dan_anh_bia { get; set; }
-        public string? mau_sac { get; set; }
-        public string? size { get; set; }
+        public string? dung_tich { get; set; } //dung tích
+        public string? loai_nuoc_hoa { get; set; } //loại nước hoa
         public decimal? gia { get; set; }
         public decimal? khuyen_mai { get; set; }
         public decimal? rate { get; set; }

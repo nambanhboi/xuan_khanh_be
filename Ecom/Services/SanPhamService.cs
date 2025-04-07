@@ -106,8 +106,8 @@ namespace Ecom.Services
                     item.mo_ta = new_sp.mo_ta;
                     item.gia = new_sp.gia;
                     item.khuyen_mai = new_sp.khuyen_mai;
-                    item.mau_sac = new_sp.mau_sac;
-                    item.size = new_sp.size;
+                    item.loai_nuoc_hoa = new_sp.loai_nuoc_hoa;
+                    item.dung_tich = new_sp.dung_tich;
                     item.is_active = new_sp.is_active;
                     item.so_luong = new_sp.so_luong;
                     item.xuat_xu = new_sp.xuat_xu;
@@ -298,24 +298,24 @@ namespace Ecom.Services
 
             if(dataQuery.Count() > 0)
             {
-                var ls_mau_sac = dataQuery.Where(x => x.mau_sac != null).GroupBy(x => x.mau_sac).Select(y => y.Key).ToList();
-                var ls_size = dataQuery.Where(x=>x.size != null).GroupBy(x => x.size).Select(y => y.Key).ToList();
+                var ls_dung_tich = dataQuery.Where(x => x.dung_tich != null).GroupBy(x => x.dung_tich).Select(y => y.Key).ToList();
+                var ls_loai = dataQuery.Where(x=>x.loai_nuoc_hoa != null).GroupBy(x => x.loai_nuoc_hoa).Select(y => y.Key).ToList();
                 var ls_phan_loai = new List<PhanLoai>();
-                if(ls_mau_sac.Count() > 0)
+                if(ls_dung_tich.Count() > 0)
                 {
                     ls_phan_loai.Add(new PhanLoai
                     {
-                        ten_phan_loai = "mau-sac",
-                        phan_loai = ls_mau_sac!
+                        ten_phan_loai = "dung-tich",
+                        phan_loai = ls_dung_tich!
                     });
                 }
                 
-                if(ls_size.Count() > 0)
+                if(ls_loai.Count() > 0)
                 {
                     ls_phan_loai.Add(new PhanLoai
                     {
-                        ten_phan_loai = "size",
-                        phan_loai = ls_size!
+                        ten_phan_loai = "loai-nuoc-hoa",
+                        phan_loai = ls_loai!
                     });
                 }
                 
@@ -331,8 +331,8 @@ namespace Ecom.Services
                     gia = x.gia,
                     khuyen_mai = x.khuyen_mai,
                     is_active = x.is_active,
-                    mau_sac = x.mau_sac,
-                    size = x.size,
+                    loai_nuoc_hoa = x.loai_nuoc_hoa,
+                    dung_tich = x.dung_tich,
                     sku = x.sku,
                     so_luong = x.so_luong,
                     mo_ta = x.mo_ta,
